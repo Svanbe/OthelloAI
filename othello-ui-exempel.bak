@@ -50,6 +50,4 @@
 
 
 ;; Start the loop.
-
-
 (thread put-piece-loop)
