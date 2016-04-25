@@ -1,0 +1,25 @@
+#lang racket
+;(require racket/gui)
+(require (file "othello-ui.rkt"))
+(require (file "Player.rkt"))
+
+;The game, start
+
+;; When the user presses the quit button we want to hide the board.
+(set-quit-fn! hide-board)
+
+;; When the user presses the restart button we want to print 
+;; "Restarting..." and clear the board.
+(set-restart-fn! 
+ (lambda () 
+   (display "Restarting...")
+   (newline)
+   (clear-board!)))
+
+
+;; Show the user interface.
+(show-board)
+
+(thread put-player-piece-loop)
+
+
