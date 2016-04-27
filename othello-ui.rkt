@@ -26,7 +26,9 @@
          clear-board!
          set-piece-at!
          add-listener!
-         del-listener!)
+         del-listener!
+         set-black-piece-at!
+         set-white-piece-at!)
 
 ;; Exported procedures -----------------------------------------------
 
@@ -66,6 +68,14 @@
 ;; Valid symbols for piece are: BLACK, WHITE or NONE.
 (define (set-piece-at! x y piece)
   (vector-set! board (+ (* y 8) x) piece)
+  (refresh))
+
+(define (set-black-piece-at! x y piece)
+  (vector-set! board (+ (* y 8) x) 'BLACK)
+  (refresh))
+
+(define (set-white-piece-at! x y piece)
+  (vector-set! board (+ (* y 8) x) 'WHITE)
   (refresh))
 
 
@@ -319,6 +329,7 @@
                        (+ offset (* tile-size
                                     (remainder index 8)))
                        (+ offset (* tile-size
+                                    
                                     (floor (/ index 8))))
                        piece-size piece-size)))))
 

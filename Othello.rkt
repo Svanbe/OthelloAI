@@ -19,7 +19,9 @@
 
 ;; Show the user interface.
 (show-board)
+(start-pieces)
+;(katt)
 
-(thread put-player-piece-loop)
+(thread black-white-loop)
 
 
