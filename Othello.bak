@@ -2,7 +2,6 @@
 ;(require racket/gui)
 (require (file "othello-ui.rkt"))
 (require (file "Player.rkt"))
-(require (file "board.rkt"))
 
 ;The game, start
 

@@ -1,0 +1,1 @@
+("6.3" ("f301fd21f047fe4c8621075e929dddd2aa42cc55" . "8b2abc45ea8016e37257c85b0101e40459168981") #"C:\\Users\\Mathias\\Documents\\GitHub\\OthelloAI\\othello-ui.rkt" (collects #"racket" #"hash.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt") (collects #"wxme" #"read.rkt"))
