@@ -1,1 +1,1 @@
-("6.3" ("66f82928be0cfdd96f67e16b5a6713c6df9df3d1" . "8b2abc45ea8016e37257c85b0101e40459168981") #"C:\\Users\\Mathias\\Documents\\GitHub\\OthelloAI\\othello-ui.rkt" (collects #"racket" #"hash.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt") (collects #"wxme" #"read.rkt"))
+("6.3" ("da42d6a8cf36f43173e2cffb561c2f22c8e1e4ee" . "29233521d52f1805872232b3ce674287c5e22726") #"/Users/mirjammattsson/Documents/OthelloAI/othello-ui.rkt" (collects #"racket" #"hash.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))

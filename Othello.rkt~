@@ -3,7 +3,6 @@
 (require (file "othello-ui.rkt"))
 (require (file "Player.rkt"))
 (require (file "board.rkt"))
-(require (file "turning.rkt"))
 
 ;The game, start
 
@@ -16,8 +15,7 @@
  (lambda () 
    (display "Restarting...")
    (newline)
-   (clear-board!)
-   (start-pieces)))
+   (clear-board!)))
 
 
 ;; Show the user interface.
