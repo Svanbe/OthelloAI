@@ -7,7 +7,7 @@
 
 ;The game, start
 
-;; When the user presses the quit button we want to hide the board.
+;; When the user presse5s the quit button we want to hide the board.
 (set-quit-fn! hide-board)
 
 ;; When the user presses the restart button we want to print 

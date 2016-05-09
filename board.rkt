@@ -47,14 +47,14 @@
 (define (black-to-white move)
   (begin
     (hash-remove! *black-list* move)
-    (add-white-list! move)))
-    ;(set-white-piece-at! (car move) (cdr move))))
+    (add-white-list! move)
+    (set-white-piece-at! (car move) (cdr move) 'WHITE)))
 
 (define (white-to-black move)
   (begin
     (hash-remove! *white-list* move)
-    (add-black-list! move)))
-    ;(set-black-piece-at! (car move) (cdr move))))
+    (add-black-list! move)
+    (set-black-piece-at! (car move) (cdr move) 'BLACK)))
 
 (define (in-black-list? move)
   (hash-has-key? *black-list* move))

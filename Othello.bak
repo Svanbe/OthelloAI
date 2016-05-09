@@ -2,6 +2,8 @@
 ;(require racket/gui)
 (require (file "othello-ui.rkt"))
 (require (file "Player.rkt"))
+(require (file "board.rkt"))
+(require (file "turning.rkt"))
 
 ;The game, start
 
@@ -14,7 +16,8 @@
  (lambda () 
    (display "Restarting...")
    (newline)
-   (clear-board!)))
+   (clear-board!)
+   (start-pieces)))
 
 
 ;; Show the user interface.
