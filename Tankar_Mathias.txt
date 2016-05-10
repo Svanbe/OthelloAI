@@ -1,0 +1,5 @@
+https://en.wikipedia.org/wiki/Computer_Othello
+
+En länk till Othello samt metoden vi ska använda.
+
+Mobility-based samt vetskap om hörn och kantvärde.
