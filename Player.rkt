@@ -4,6 +4,7 @@
 (require racket/hash)
 (require "board.rkt")
 (require "turning.rkt")
+(require "AI.rkt")
 (provide (all-defined-out))
 
 
@@ -36,19 +37,17 @@
 
 (define color 'BLACK)
 
+
 ;visar movsen vi gör på brädet
 (define (black-white-loop)
   (let ((move (get-next-move)))
-    (begin (check-pieces color move)
-           (cond ((or (move-made? move) (not (possible-move? move)))
+           (cond ((or (move-made? move) (not (possible-move? move color)))
                       (begin (display "Not possible move") (newline)))
-                 ((not (null? *turnings*))
-                  (begin
+                 ;((end-game? color) (winner))
+                  (else (begin
                     (board-to-move move)
                     (add-color-list color move)
                     (turn-pieces color)
-                    (clear-neighbours)
-                    (clear-intersection)
                     (clear-turnings)
                     (display "got-move") 
                     (display move)
@@ -56,12 +55,7 @@
                     (when (not (eq? move 'aborted))
                       (set-piece-at! (get-x move) (get-y move)
                                      color))
-                    (set! color (black-or-white))))
-                 (else "displayNot possible move"))))
+                    (set! color (black-or-white))))))
   (black-white-loop))
-
-
-
-
 
 

@@ -4,6 +4,7 @@
 (require (file "Player.rkt"))
 (require (file "board.rkt"))
 (require (file "turning.rkt"))
+(require (file "AI.rkt"))
 
 ;The game, start
 
