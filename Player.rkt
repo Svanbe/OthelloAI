@@ -41,9 +41,8 @@
 ;visar movsen vi gör på brädet
 (define (black-white-loop)
   (let ((move (get-next-move)))
-    (begin (possible-moves color)
-           (cond ((end-game? color move) (winner))
-                 ((or (move-made? move) (not (possible-move? color move)))
+    (begin
+           (cond ((or (move-made? move) (not (possible-move? color move)))
                   (begin (display "Not possible move") (newline)))
                  (else (begin
                          (board-to-move move)
@@ -55,9 +54,8 @@
                          (newline)
                          (when (not (eq? move 'aborted))
                            (set-piece-at! (get-x move) (get-y move)
-                                          color))
-                         (set! color (black-or-white)))))
-           (clean-slate)))
+                                          color)))))
+                         (set! color (black-or-white))))
   (black-white-loop))
 
 

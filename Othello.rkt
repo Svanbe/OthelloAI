@@ -24,7 +24,9 @@
 ;; Show the user interface.
 (show-board)
 (start-pieces)
-;(katt)
+(if (end-game? color)
+    (winner)
+    '())
 
 (thread black-white-loop)
 
