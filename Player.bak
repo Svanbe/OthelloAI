@@ -3,9 +3,12 @@
 (require (file "othello-ui.rkt"))
 (require racket/hash)
 (require "board.rkt")
+(require "turning.rkt")
+(require "AI.rkt")
 (provide (all-defined-out))
 
-;what is this
+
+;what is this.
 (define get-x car)
 (define get-y cdr)
 
@@ -32,25 +35,27 @@
                   (set! num 0)
                   (set! num 1))))))
 
+(define color 'BLACK)
+
+
 ;visar movsen vi gör på brädet
 (define (black-white-loop)
   (let ((move (get-next-move)))
-    (if (move-made? move)
-        (begin (display "Not possible move")
-               (newline))
-        (begin (board-to-move move)
-               (display "got-move") 
-               (display move)
-               (newline)
-               (when (not (eq? move 'aborted))
-                 (set-piece-at! (get-x move) (get-y move)
-                                (black-or-white))))))
+    (begin
+           (cond ((or (move-made? move) (not (possible-move? color move)))
+                  (begin (display "Not possible move") (newline)))
+                 (else (begin
+                         (board-to-move move)
+                         (add-color-list color move)
+                         (turn-pieces color)
+                         (clear-turnings)
+                         (display "got-move") 
+                         (display move)
+                         (newline)
+                         (when (not (eq? move 'aborted))
+                           (set-piece-at! (get-x move) (get-y move)
+                                          color)))))
+                         (set! color (black-or-white))))
   (black-white-loop))
-
-
-
-
-
-
 
 

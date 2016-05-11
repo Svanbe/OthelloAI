@@ -12,14 +12,14 @@
 (define (winner)
   (cond ((> (points 'BLACK) (points 'WHITE)) (display "Black won!"))
         ((< (points 'BLACK) (points 'WHITE)) (display "White won!"))
-        ((else (display "It's a tie!")))))
+        (else (display "It's a tie!"))))
 
 (define (end-game? color)
   (begin (possible-moves 'BLACK)
          (possible-moves 'WHITE)
          (or (if (equal? color 'BLACK)
-             (null? *possible-black*)
-             (null? *possible-white*))
+                 (null? *possible-black*)
+                 (null? *possible-white*))
              (hash-empty? *board*))))
 
 ;Hanterar möjliga drag för den färgen color som skickas in.
@@ -53,9 +53,15 @@
       (count-white-possible)
       (count-black-possible)))
 
-(define (clean-slate)
-  (begin (clear-possible-black)
-         (clear-possible-white)))
+(define (clean-slate color)
+  (if (equal? color 'BLACK)
+      (clear-possible-black)
+      (clear-possible-white)))
+
+(define (get-color-hash color)
+  (if (equal? color 'BLACK)
+      *possible-black*
+      *possible-white*))
 
 ;listorna som ska användas för AI:n när den
 ;ska kolla vilka möjliga drag som finns.

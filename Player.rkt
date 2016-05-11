@@ -37,6 +37,10 @@
 
 (define color 'BLACK)
 
+(define (not-color)
+  (if (equal? color 'BLACK)
+      'WHITE
+      'BLACK))
 
 ;visar movsen vi gör på brädet
 (define (black-white-loop)
