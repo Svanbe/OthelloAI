@@ -2,7 +2,7 @@
 ;; Last modified::  2004-11-15,  10:53:11
 ;; Created by:      Tord Svensson (torsv@ida.liu.se)
 
-;; Racket-line added 2016 by Anders M.L..
+;; Racket-line added 2016 by Anders M.L.
 
 ;; Please note that this is not necessarily in good Racket GUI programming
 ;; style. Feel free to modify. This is an old bare-bones skeleton using

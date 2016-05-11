@@ -6,7 +6,7 @@
 ;(require (file "turning.rkt"))
 (require (file "AI.rkt"))
 
-;The game, start
+;The game, start.
 
 ;; When the user presse5s the quit button we want to hide the board.
 (set-quit-fn! hide-board)

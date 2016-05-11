@@ -8,7 +8,7 @@
 (provide (all-defined-out))
 
 
-;what is this
+;what is this.
 (define get-x car)
 (define get-y cdr)
 

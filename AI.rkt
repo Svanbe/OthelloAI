@@ -3,7 +3,7 @@
 (require "board.rkt")
 (provide (all-defined-out))
 
-;skapar en vinnarfunktion
+;skapar en vinnarfunktion.
 (define (points color)
   (if (equal? 'BLACK color)
       (hash-count *black-list*)
