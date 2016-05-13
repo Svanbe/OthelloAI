@@ -1,11 +1,12 @@
 #lang racket
 ;(require racket/gui)
 (require (file "othello-ui.rkt"))
-(require racket/hash)
 (require "board.rkt")
 (require "turning.rkt")
 (require "AI.rkt")
+(require (file "othello-AI.rkt"))
 (provide (all-defined-out))
+(require racket/trace)
 
 
 ;what is this.
@@ -43,23 +44,32 @@
       'BLACK))
 
 ;visar movsen vi gör på brädet
-(define (black-white-loop)
-  (let ((move (get-next-move)))
+(define (black-white-loop move)
+;  (let ((move (get-next-move)))
     (begin
-           (cond ((or (move-made? move) (not (possible-move? color move)))
-                  (begin (display "Not possible move") (newline)))
-                 (else (begin
-                         (board-to-move move)
-                         (add-color-list color move)
-                         (turn-pieces color)
-                         (clear-turnings)
-                         (display "got-move") 
-                         (display move)
-                         (newline)
-                         (when (not (eq? move 'aborted))
-                           (set-piece-at! (get-x move) (get-y move)
-                                          color)))))
-                         (set! color (black-or-white))))
-  (black-white-loop))
+      (cond ((or (move-made? move) (not (possible-move? color move)))
+             (begin (display "Not possible move") (newline)))
+            (else (begin
+                    (board-to-move move)
+                    (add-color-list color move)
+                    (turn-pieces color)
+                    (clear-turnings)
+                    (display "got-move") 
+                    (display move)
+                    (newline)
+                    (when (not (eq? move 'aborted))
+                      (set-piece-at! (get-x move) (get-y move)
+                                     color))
+                    (set! color (black-or-white))))))
+  (play-game-loop))
 
+;Othello AI:n
+(define (activate-ai)
+    (handle-lists color (not-color)))
+
+(define (play-game-loop)
+  (let ((turn 1))
+    (if (equal? turn 1)
+        (when (black-white-loop (get-next-move)) (set! turn 0))
+        (when (black-white-loop (activate-ai)) (set! turn 1)))))
 

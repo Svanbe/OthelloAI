@@ -2,6 +2,7 @@
 (require "turning.rkt")
 (require "board.rkt")
 (provide (all-defined-out))
+(require racket/trace)
 
 ;skapar en vinnarfunktion.
 (define (points color)
@@ -87,3 +88,4 @@
 (define (clear-possible-black)
   (hash-clear! *possible-black*))
 
+(trace possible-moves)
