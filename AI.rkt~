@@ -6,9 +6,9 @@
 
 ;skapar en vinnarfunktion.
 (define (points color)
-  (cond ((equal? 'BLACK color) (hash-count *black-list*))
-        ((equal? 'WHITE color) (hash-count *white-list*))
-        (else #f)))
+  (if (equal? 'BLACK color)
+      (hash-count *black-list*)
+      (hash-count *white-list*)))
 
 (define (winner)
   (cond ((> (points 'BLACK) (points 'WHITE)) (display "Black won!"))
@@ -88,3 +88,4 @@
 (define (clear-possible-black)
   (hash-clear! *possible-black*))
 
+(trace possible-moves)

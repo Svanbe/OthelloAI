@@ -47,8 +47,7 @@
 (define (black-white-loop move)
 ;  (let ((move (get-next-move)))
     (begin
-      (cond ((end-game? color) (winner))
-            ((or (move-made? move) (not (possible-move? color move)))
+      (cond ((or (move-made? move) (not (possible-move? color move)))
              (begin (display "Not possible move") (newline)))
             (else (begin
                     (board-to-move move)
