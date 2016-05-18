@@ -1,13 +1,14 @@
 #lang racket
 (require "turning.rkt")
-(require "board.rkt")
+(require "board-object.rkt")
+(require "start-board.rkt")
 (provide (all-defined-out))
 (require racket/trace)
 
 ;skapar en vinnarfunktion.
 (define (points color)
-  (cond ((equal? 'BLACK color) (hash-count *black-list*))
-        ((equal? 'WHITE color) (hash-count *white-list*))
+  (cond ((equal? 'BLACK color) (hash-count (send *board* get-black-list)))
+        ((equal? 'WHITE color) (hash-count (send *board* get-white-list)))
         (else #f)))
 
 (define (winner)
@@ -19,13 +20,13 @@
   (begin (possible-moves 'BLACK)
          (possible-moves 'WHITE)
          (or (if (equal? color 'BLACK)
-                 (null? *possible-black*)
-                 (null? *possible-white*))
-             (hash-empty? *board*))))
+                 (null? (send *board* get-possible-black))
+                 (null? (send *board* get-possible-white)))
+             (hash-empty? (send *board* get-board)))))
 
 ;Hanterar möjliga drag för den färgen color som skickas in.
 (define (possible-moves color)
-  (add-all-possible-moves color (hash-values *board*)))
+  (add-all-possible-moves color (hash-values (send *board* get-board))))
 
 (define (add-all-possible-moves color board-list)
   (cond ((null? board-list) '())
@@ -42,49 +43,28 @@
       (add-to-black-possible-moves move)))
 
 (define (add-to-white-possible-moves move)
-  (begin (add-to-white move)
+  (begin (send *board* add-to-white move)
          (clear-turnings)))
 
 (define (add-to-black-possible-moves move)
-  (begin (add-to-black move)
+  (begin (send *board* add-to-black move)
          (clear-turnings)))
 
 (define (count-a-list color)
   (if (equal? color 'WHITE)
-      (count-white-possible)
-      (count-black-possible)))
+      (send *board* count-white-possible)
+      (send *board* count-black-possible)))
 
 (define (clean-slate color)
   (if (equal? color 'BLACK)
-      (clear-possible-black)
-      (clear-possible-white)))
+      (send *board* clear-possible-black)
+      (send *board* clear-possible-white)))
 
 (define (get-color-hash color)
   (if (equal? color 'BLACK)
-      *possible-black*
-      *possible-white*))
+      (send *board* get-possible-black)
+      (send *board* get-possible-white)))
 
 ;listorna som ska användas för AI:n när den
 ;ska kolla vilka möjliga drag som finns.
-(define *possible-white* (make-hash))
-
-(define (add-to-white move)
-  (hash-set! *possible-white* move move))
-
-(define (clear-possible-white)
-  (hash-clear! *possible-white*))
-
-(define (count-white-possible)
-  (hash-count *possible-white*))
-
-(define *possible-black* (make-hash))
-
-(define (add-to-black move)
-  (hash-set! *possible-black* move move))
-
-(define (count-black-possible)
-  (hash-count *possible-black*))
-
-(define (clear-possible-black)
-  (hash-clear! *possible-black*))
 

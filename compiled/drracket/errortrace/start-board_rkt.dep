@@ -1,0 +1,1 @@
+("6.3" ("04f6caf210556fa94f142c1e52d3f744517be8c3" . "ad46ed5917e73a4cb4dca358e53aa26e699b726e") #"/Users/mirjammattsson/Documents/OthelloAI/board-object.rkt" #"/Users/mirjammattsson/Documents/OthelloAI/othello-ui.rkt" (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt") (collects #"wxme" #"read.rkt"))
