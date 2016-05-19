@@ -71,11 +71,11 @@
   (vector-set! board (+ (* y 8) x) piece)
   (refresh))
 
-(define (set-black-piece-at! x y piece)
+(define (set-black-piece-at! x y)
   (vector-set! board (+ (* y 8) x) 'BLACK)
   (refresh))
 
-(define (set-white-piece-at! x y piece)
+(define (set-white-piece-at! x y)
   (vector-set! board (+ (* y 8) x) 'WHITE)
   (refresh))
 
