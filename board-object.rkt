@@ -65,6 +65,9 @@
     (define/public (move-made? move)
       (hash-has-key? *move-list* move))
 
+    (define/public (clear-move-list)
+      (hash-clear *move-list*))
+
     ;hantera *boards*
     (define/public (add-to-board move)
       (hash-set! *boards* move move))
