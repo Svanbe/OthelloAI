@@ -17,7 +17,7 @@
     (define/public (get-move-list)
       *move-list*)
     
-    (define/public (get-board)
+    (define/public (get-board-list)
       *boards*)
     
     (define/public (get-white-list)
@@ -36,6 +36,10 @@
       (if (equal? color 'BLACK)
           *possible-black*
           *possible-white*))
+
+    (define/public (get-random-possible-color color)
+      (let ((hash (send this get-possible-color color)))
+      (list-ref (hash-keys hash) (random (hash-count hash)))))
 
    
     ;hanterar possible-white-list
