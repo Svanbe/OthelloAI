@@ -31,9 +31,15 @@
     
     (define/public (get-possible-black)
       *possible-black*)
-    
+
+    (define/public (get-possible-color color)
+      (if (equal? color 'BLACK)
+          *possible-black*
+          *possible-white*))
+
+   
     ;hanterar possible-white-list
-    (define/public (add-to-white move)
+    (define/public (add-possible-white move)
       (hash-set! *possible-white* move move))
     
     (define/public (clear-possible-white)
@@ -43,7 +49,7 @@
       (hash-count *possible-white*))
     
     ;hanterar possible-black-list
-    (define/public (add-to-black move)
+    (define/public (add-possible-black move)
       (hash-set! *possible-black* move move))
     
     (define/public (count-black-possible)
@@ -60,13 +66,13 @@
       (hash-set! *move-list* move move))
     
     (define/public (remove-from-move move)
-      (hash-remove! *move-list* move move))
+      (hash-remove! *move-list* move))
     
     (define/public (move-made? move)
       (hash-has-key? *move-list* move))
 
     (define/public (clear-move-list)
-      (hash-clear *move-list*))
+      (hash-clear! *move-list*))
 
     ;hantera *boards*
     (define/public (add-to-board move)
@@ -76,7 +82,7 @@
       (hash-remove! *boards* move))
     
     (define/public (clear-board)
-      (hash-clear *boards*))
+      (hash-clear! *boards*))
 
     ;Flyttar mellan *board* och *move-list*
     (define/public (board-to-move move)
@@ -130,8 +136,8 @@
       (hash-has-key? *white-list* move))
     
     (define/public (clear-black-and-white)
-      (begin (hash-clear *black-list*)
-             (hash-clear *white-list*)))
+      (begin (hash-clear! *black-list*)
+             (hash-clear! *white-list*)))
     
     (super-new)))
 
