@@ -1,10 +1,7 @@
 #lang racket
 (require "othello-ui.rkt")
+;(require "start-board.rkt")
 (provide (all-defined-out))
-
-;skapar klassen boards% som är vårt bräde. Här kan man i olika hash-tabeller se vilka drag som har gjorts, vilken färg det är på dessa drag och vilka möjliga drag som finns.
-;Mirjam Mattsson, Mathias Svanberg
-;senast uppdaterad 24/5-2016
 
 (define boards%
   (class object%
@@ -20,7 +17,7 @@
     (define/public (get-move-list)
       *move-list*)
     
-    (define/public (get-board)
+    (define/public (get-board-list)
       *boards*)
     
     (define/public (get-white-list)
@@ -54,10 +51,6 @@
     
     (define/public (count-white-possible)
       (hash-count *possible-white*))
-
-    (define/public (clear-both-b-w)
-      (send this clear-possible-black)
-      (send this clear-possible-white))
     
     ;hanterar possible-black-list
     (define/public (add-possible-black move)
@@ -151,4 +144,12 @@
              (hash-clear! *white-list*)))
     
     (super-new)))
+
+    ;(begin (send this hash-remove! *black-list* move)
+    ;(send this add-white-list! move))))
+    ; (begin (send this hash-remove! *white-list* move)
+    ;       (send this add-black-list! move))))
+    ; (if (equal? this *board*)
+    ;(if (equal? this *board*)
+    
     

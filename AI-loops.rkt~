@@ -1,0 +1,76 @@
+#lang racket
+
+(provide (all-defined-out))
+(require "Othello-AI.rkt")
+
+;Undo-funktion, ångrar ett drag
+(define (undo-move color move)
+  (send *AI-board* move-to-board move)
+  (send *AI-board* remove-color-list color move))
+
+
+(define (simple-AI color)
+  (copy-board-to-AI)
+  (possible-moves *AI-board* color)
+  (send *AI-board* get-random-possible-color color))
+
+(require racket/trace)
+
+(define (complex-AI color)
+  (copy-board-to-AI)
+  (possible-moves *AI-board* color)
+  (get-AI-level1-move *AI-board* color))
+
+(define (get-AI-level1-move boards color)
+  (AI-list-to-move *AI-board* (hash-values (send boards get-possible-color color)) color level1-proc)
+  (get-max-move))
+
+(define (level1-proc boards color move)
+  (begin (make-the-move move boards color)
+         (add-to-move-points (count-turnings) move)
+         (clear-turnings)))
+
+  
+
+(define (complex-AI1 color)
+  (copy-board-to-AI)
+  (possible-moves *AI-board* color)
+  (get-AI-move *AI-board* color))
+
+(define (get-AI-move boards color)
+    (begin (AI-list-to-move boards (hash-values (send boards get-possible-color color)) color AI-loop-help)
+           (get-min-AI-move)))
+
+(define (AI-list-to-move boards lst color proc)
+  (cond ((null? lst) '())
+        ((not (list? lst)) (proc boards color lst))
+        (else (begin (proc boards color (car lst))
+                     (AI-list-to-move boards (cdr lst) color proc)))))
+
+
+(define (AI-loop-help boards color move)
+  (let ((not-color (if (equal? color 'BLACK)
+                       'WHITE
+                       'BLACK)))
+         (begin (make-the-move move boards color)
+                (clear-turnings)
+         (add-to-potential-AI (look-possibilities-enemy boards color not-color) move)
+         (add-min-to-AI)
+         (clear-board *AI-board*)
+         (copy-board-to-AI))))
+
+(define (look-possibilities-enemy boards color not-color)
+  (begin (possible-moves boards not-color)
+         (check-pieces-list (hash-values (send *AI-board* get-possible-color not-color)) not-color)
+         (counted)))
+
+(define (check-pieces-list list color)
+  (if (null? list)
+      '()
+       (begin (add-to-help *AI-board* color (car list)) (check-pieces-list (cdr list) color))))
+
+(define (add-to-help boards color move)
+  (begin (check-pieces boards color move)
+  (add-to-move-points (count-turnings) move)
+  (add-count (count-turnings))
+  (clear-turnings)))

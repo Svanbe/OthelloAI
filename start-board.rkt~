@@ -2,12 +2,10 @@
 
 (require "board-object.rkt")
 (require "othello-ui.rkt")
-(provide (all-defined-out))
-
-;En fil där vi skapar våra två olika board, det vanliga som är det som kommer att synas när vi spelar
-;och ett AI-board som vi kommer att använda då vi spelar mot en AI.
-;Mirjam Mattsson, Mathias Svanberg
-;senast uppdaterad 24/5-2016
+(provide start-pieces
+         *board*
+         *AI-board*
+         start-board)
 
 ;definirerar de olika boardsen
 (define *board*
@@ -28,7 +26,7 @@
 
 ;Startbrädet
 ;hjälpfunktion
-(define (start-board-help move color)
+(define (start-help move color)
   (set-piece-at! (car move) (cdr move) color)
   (send *board* board-to-move move)
   (if (equal? color 'WHITE)
@@ -36,7 +34,7 @@
       (send *board* add-black-list! move)))
 
 (define (start-pieces)
-  (start-board-help (cons 3 3) 'BLACK)
-  (start-board-help (cons 4 4) 'BLACK)
-  (start-board-help (cons 3 4) 'WHITE)
-  (start-board-help (cons 4 3) 'WHITE))
+  (start-help (cons 3 3) 'BLACK)
+  (start-help (cons 4 4) 'BLACK)
+  (start-help (cons 3 4) 'WHITE)
+  (start-help (cons 4 3) 'WHITE))
