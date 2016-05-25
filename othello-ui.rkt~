@@ -13,7 +13,6 @@
 
 #lang racket
 
-;Fil som vi utgick ifrån som grund. Här hämtas allt det grafiska.
 
 (require racket/gui)
 
